@@ -32,11 +32,9 @@
 			var height = $this.height();
 			var width  = $this.width();
 			
-			// Wrap the inner content.
-			$this.wrapInner('<div />');
-			
-			// Set overflow to $this element.
-			$this.css({'overflow': 'hidden'});
+			$this
+				.wrapInner('<div />')			// Wrap the inner content.
+				.css({'overflow': 'hidden'});		// Set overflow to $this element.
 			
 			// Get the actual height of the inner content.
 			var actualHeight = $this.children().eq(0).height();
@@ -79,9 +77,12 @@
 		});
 	}
 	
-	// Function that finds every element with data attribute and inits the plugin upon it.
+	// Find and cache every element with data attribute set:
+	var $autoWidthElements = $('[data-element-auto-width]');
+	
+	// Function that inits the plugin upon cached elements.
 	$.fn.elementAutoWidth.run = function() {
-		$('[data-element-auto-width]').each(function () {
+		$autoWidthElements.each(function () {
 			$(this).elementAutoWidth();
 		});
 	}
